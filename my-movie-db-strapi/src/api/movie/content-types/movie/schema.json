@@ -1,0 +1,43 @@
+{
+  "kind": "collectionType",
+  "collectionName": "movies",
+  "info": {
+    "singularName": "movie",
+    "pluralName": "movies",
+    "displayName": "Movies",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string",
+      "required": true
+    },
+    "Stars": {
+      "type": "string"
+    },
+    "Year": {
+      "type": "integer"
+    },
+    "Duration": {
+      "type": "integer"
+    },
+    "Director": {
+      "type": "string"
+    },
+    "Plot": {
+      "type": "string"
+    },
+    "imgUrl": {
+      "type": "string"
+    },
+    "imdbID": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}

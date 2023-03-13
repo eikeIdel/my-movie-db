@@ -1,9 +1,8 @@
-
-
 <script setup>
 import LikeHeart from './LikeHeart.vue';
 import { ref, computed } from 'vue'
-import { useAddNewMovie } from '../composables/useAddNewMovie.js'
+import { useAddNewMovie } from '../composables/strapi-routes/useAddNewMovie.js'
+import { useDeleteMyMovie } from '../composables/strapi-routes/useDeleteMyMovie.js'
 
 const props = defineProps({
     title: String,
@@ -14,11 +13,12 @@ const props = defineProps({
     stars: String,
     plot: String,
     isMyMovie: Boolean,
-    id: String,
+    id: Number,
+    imdbID: String,
 });
 
-const { addNewMovie, movieID } = useAddNewMovie();
-
+const { addNewMovie } = useAddNewMovie();
+const { deleteMyMovie } = useDeleteMyMovie();
 const isFav = ref(props.isMyMovie ? true : false);
 const heartColor = computed(() => {
     return isFav.value ? '--color:rgb(212, 57, 57);' : '--color:rgb(143, 141, 141);'
@@ -29,7 +29,7 @@ async function heartClick() {
     if (isFav.value) {
         const data = JSON.stringify({
             data: {
-                imdbID: props.id,
+                imdbID: props.imdbID,
                 Title: props.title,
                 Stars: props.stars,
                 Year: props.year,
@@ -41,9 +41,9 @@ async function heartClick() {
         })
         addNewMovie(data)
     }
-    // else {
-    //     deleteMyMovie(props.id)
-    // }
+    else {
+        deleteMyMovie(props.imdbID)
+    }
 }
 
 console.log(props.id)

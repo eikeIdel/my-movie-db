@@ -2,15 +2,15 @@
 import FlexWrap from './FlexWrap.vue'
 import MovieCard from './MovieCard.vue';
 import { ref, computed, onMounted } from 'vue'
-import { useGetMyMovies } from '../composables/useGetMyMovies';
+import { useGetMyMovies } from '../composables/strapi-routes/useGetMyMovies';
 
 
 const { myMovies, getMyMovies } = useGetMyMovies();
 const isMyMovie = ref(true)
 
-onMounted(() => {
-    useGetMyMovies();
-})
+
+useGetMyMovies();
+
 </script>
 
 <template>
@@ -19,7 +19,7 @@ onMounted(() => {
     </FlexWrap>
     <FlexWrap>
         <MovieCard v-for="movie in myMovies" :title="movie.attributes.Title" :imgUrl="movie.attributes.imgUrl"
-            :isMyMovie="isMyMovie" />
+            :isMyMovie="isMyMovie" :id="movie.id" :imdbID="movie.attributes.imdbID" :key="movie.id" />
     </FlexWrap>
 </template>
 

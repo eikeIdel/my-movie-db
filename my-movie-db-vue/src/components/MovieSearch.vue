@@ -2,18 +2,18 @@
 import { ref, computed } from "vue"
 import MovieCard from './MovieCard.vue'
 import FlexWrap from './FlexWrap.vue'
-import { useSearchMovies } from "../composables/useSearchMovies";
-
+import { useSearchMovies } from "../composables/imdb-routes/useSearchMovies";
 
 const { query, onlyMovies, startSearch, useApi } = useSearchMovies();
 useApi.value = true;
 
-function log() {
-    console.log(onlyMovies)
-
-}
+const log = computed(() => {
+    console.log(onlyMovies.value);
+})
 
 </script>
+
+
 
 <template>
     <form @submit.prevent="startSearch()">
@@ -21,10 +21,10 @@ function log() {
         <input v-model.text="query" name="query" />
         <button type="submit">Start Search</button>
     </form>
-    <button @click="log"></button>
+
     <FlexWrap>
-        <MovieCard v-for="movie in onlyMovies" :title="movie.l" :imgUrl="movie.i.imageUrl" :stars="movie.s" :year="movie.y"
-            :id="movie.id" />
+        <MovieCard v-for="movie in onlyMovies" :title="movie.l" :imgUrl="movie.i?.imageUrl" :stars="movie.s" :year="movie.y"
+            :id="movie.id" :key="movie.id" />
     </FlexWrap>
 </template>
 

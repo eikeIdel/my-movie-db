@@ -6,14 +6,7 @@ import { useSearchMovies } from "../composables/imdb-routes/useSearchMovies";
 
 const { query, onlyMovies, startSearch, useApi } = useSearchMovies();
 useApi.value = true;
-
-const log = computed(() => {
-    console.log(onlyMovies.value);
-})
-
 </script>
-
-
 
 <template>
     <form @submit.prevent="startSearch()">
@@ -24,7 +17,7 @@ const log = computed(() => {
 
     <FlexWrap>
         <MovieCard v-for="movie in onlyMovies" :title="movie.l" :imgUrl="movie.i?.imageUrl" :stars="movie.s" :year="movie.y"
-            :id="movie.id" :key="movie.id" />
+            :imdbID="movie.id" :key="movie.id" />
     </FlexWrap>
 </template>
 

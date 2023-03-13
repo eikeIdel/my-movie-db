@@ -6,14 +6,13 @@ export function useSearchMovies() {
     const queryResults = ref([]);
     const onlyMovies = computed(() => {
         if (queryResults.value.d) {
-            queryResults.value.d.filter((result) => { return result.qid === 'movie' })
+            return queryResults.value.d.filter((result) => { return result.qid === 'movie' })
         }
     })
 
     async function startSearch() {
         if (!query.value) {
             alert('No empty search allowed.');
-
         }
         else if (useApi.value === true) {
             const url = `https://imdb8.p.rapidapi.com/auto-complete?q=${query.value}`;
@@ -42,7 +41,7 @@ export function useSearchMovies() {
                     }]
             }
         }
-        console.log(onlyMovies);
+        console.log(onlyMovies.value);
     }
     return { query, onlyMovies, startSearch, useApi }
 }

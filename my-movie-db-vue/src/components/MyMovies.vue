@@ -8,9 +8,6 @@ import { useGetMyMovies } from '../composables/strapi-routes/useGetMyMovies';
 const { myMovies, getMyMovies } = useGetMyMovies();
 const isMyMovie = ref(true)
 
-
-useGetMyMovies();
-
 </script>
 
 <template>

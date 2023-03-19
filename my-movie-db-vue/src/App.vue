@@ -1,13 +1,10 @@
 <script setup>
-import MovieSearch from './components/MovieSearch.vue';
-import MyMovies from './components/MyMovies.vue';
-
+import Navbar from './layout/Navbar.vue'
 </script>
 
 <template>
-  <MovieSearch />
-  <hr>
-  <MyMovies />
+  <Navbar />
+  <router-view />
 </template>
 
 <style></style>

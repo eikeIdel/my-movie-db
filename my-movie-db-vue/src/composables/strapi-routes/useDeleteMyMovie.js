@@ -1,12 +1,10 @@
 import { ref } from 'vue'
-// import { useSearchMovieDetails } from './useSearchMovieDetails';
 
 export function useDeleteMyMovie() {
     const strapiID = ref(0);
 
-    async function deleteMyMovie(movieID) {
+    async function deleteMyMovie(imdbID) {
 
-        console.log(movieID);
         const myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer " + import.meta.env.VITE_STRAPI_TOKEN);
 
@@ -16,7 +14,7 @@ export function useDeleteMyMovie() {
             redirect: 'follow',
         };
 
-        await fetch(`${import.meta.env.VITE_STRAPI_DOMAIN}/api/movies?filters[imdbID][$eq]=${movieID}`, requestOptions)
+        await fetch(`${import.meta.env.VITE_STRAPI_DOMAIN}/api/movies?filters[imdbID][$eq]=${imdbID}`, requestOptions)
             .then(response => response.json())
             .then(result => strapiID.value = result.data[0].id)
             .catch(error => console.log('error', error));

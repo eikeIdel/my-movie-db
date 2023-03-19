@@ -1,17 +1,17 @@
 <script setup>
 import LikeHeart from './LikeHeart.vue';
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import { useAddNewMovie } from '../composables/strapi-routes/useAddNewMovie.js'
 import { useDeleteMyMovie } from '../composables/strapi-routes/useDeleteMyMovie.js'
 
 const props = defineProps({
-    title: String,
-    imgUrl: String,
-    year: Number,
-    duration: Number,
-    director: String,
-    stars: String,
-    plot: String,
+    Title: String,
+    Poster: String,
+    Release: String,
+    Runtime: String,
+    Director: String,
+    Actors: String,
+    Plot: String,
     isMyMovie: Boolean,
     id: Number,
     imdbID: String,
@@ -27,39 +27,28 @@ const heartColor = computed(() => {
 async function heartClick() {
     isFav.value = !isFav.value;
     if (isFav.value) {
-        const data = JSON.stringify({
-            data: {
-                imdbID: props.imdbID,
-                Title: props.title,
-                Stars: props.stars,
-                Year: props.year,
-                Duration: props.duration,
-                imgUrl: props.imgUrl,
-                Director: "",
-                Plot: ""
-            }
-        })
-        addNewMovie(data)
+
+        addNewMovie(props.imdbID)
     }
     else {
         deleteMyMovie(props.imdbID)
     }
 }
 
-console.log(props.id)
+
 </script>
 
 <template>
-    <div v-if="title" class="MovieCard">
+    <div v-if="Title" class="MovieCard">
         <LikeHeart :isFav="isFav" :heartColor="heartColor" :heartClick="heartClick" />
-        <img v-if="imgUrl" :src="imgUrl" alt="">
-        <h2>{{ title }}</h2>
+        <img v-if="Poster" :src="Poster" alt="">
+        <p>{{ Title }}</p>
         <div>
-            <p v-if="year">Erscheinungsjahr: {{ year }}</p>
-            <p v-if="duration">Filmlänge: {{ duration }} min</p>
-            <p v-if="director">Regie: {{ director }}</p>
-            <p v-if="stars">Stars: {{ stars }}</p>
-            <p v-if="plot">Plot:{{ plot }}</p>
+            <p v-if="Release">Published: {{ Release }}</p>
+            <p v-if="Runtime">Length: {{ Runtime }}</p>
+            <p v-if="Director">Regie: {{ Director }}</p>
+            <p v-if="Actors">Stars: {{ Actors }}</p>
+            <p v-if="Plot">Plot:{{ Plot }}</p>
         </div>
     </div>
 </template>
@@ -67,9 +56,9 @@ console.log(props.id)
 <style>
 .MovieCard {
     position: relative;
-    width: 350px;
     border-radius: 15px;
     border: solid 4px var(--frameColor);
+    max-width: 15rem;
 }
 
 .MovieCard img {

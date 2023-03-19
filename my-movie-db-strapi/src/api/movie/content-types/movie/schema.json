@@ -10,20 +10,21 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "versions": {
+      "versioned": true
+    }
+  },
   "attributes": {
     "Title": {
       "type": "string",
       "required": true
     },
-    "Stars": {
+    "Actors": {
       "type": "string"
     },
-    "Year": {
-      "type": "integer"
-    },
-    "Duration": {
-      "type": "integer"
+    "Release": {
+      "type": "biginteger"
     },
     "Director": {
       "type": "string"
@@ -31,13 +32,53 @@
     "Plot": {
       "type": "string"
     },
-    "imgUrl": {
+    "Poster": {
       "type": "string"
     },
     "imdbID": {
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "Writer": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string"
+    },
+    "Genre": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string"
+    },
+    "BoxOffice": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string"
+    },
+    "Country": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string"
+    },
+    "Runtime": {
+      "pluginOptions": {
+        "versions": {
+          "versioned": true
+        }
+      },
+      "type": "string"
     }
   }
 }

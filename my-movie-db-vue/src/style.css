@@ -1,11 +1,13 @@
 :root {
-  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+
+
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -14,7 +16,8 @@
   -webkit-text-size-adjust: 100%;
 
   --frameColor: rgb(160 145 145);
-  --fontColor: rgb(219, 205, 205);
+  --fontColor: rgb(162, 162, 162);
+  --fontColorHover: rgb(193, 190, 190);
 
 }
 
@@ -35,7 +38,6 @@ img {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -45,9 +47,17 @@ h1 {
   line-height: 1.1;
 }
 
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--fontColorHover);
+}
+
 #app {
   max-width: 1450px;
-  margin: 0 auto;
+  margin: 2rem auto 0 auto;
   padding: 2rem;
   text-align: center;
 }

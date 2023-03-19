@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_star_stars",
+  "info": {
+    "displayName": "Stars",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "Star": {
+      "type": "string",
+      "unique": true
+    }
+  }
+}

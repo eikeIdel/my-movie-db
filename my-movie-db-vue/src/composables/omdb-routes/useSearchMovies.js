@@ -1,12 +1,28 @@
 import { ref, computed } from "vue"
+import { useGetMyMovies } from "../strapi-routes/useGetMyMovies";
+
 
 export function useSearchMovies() {
+
+
+    const { getMyMovies, myMovies } = useGetMyMovies();
     const useApi = ref(true);
     const query = ref('');
-    const queryResults = ref([]);
+    const queryResults = ref({ Search: [] });
+
     const onlyMovies = computed(() => {
-        if (queryResults.value.d) {
-            return queryResults.value.d.filter((result) => { return result.qid === 'movie' })
+        if (queryResults.value) {
+            let finalResult = queryResults.value.Search;
+            finalResult.forEach(foundMovie => {
+                if (myMovies.value.some(myMovie => myMovie.imdbID === foundMovie.imdbID)) {
+                    finalResult[finalResult.indexOf(foundMovie)].isMyMovie = true;
+                }
+                else {
+                    finalResult[finalResult.indexOf(foundMovie)].isMyMovie = false;
+                }
+            });
+
+            return finalResult;
         }
     })
 
@@ -15,16 +31,16 @@ export function useSearchMovies() {
             alert('No empty search allowed.');
         }
         else if (useApi.value === true) {
-            const url = `https://imdb8.p.rapidapi.com/auto-complete?q=${query.value}`;
+            console.count('REQUEST');
+            await getMyMovies();
+            const baseUrl = import.meta.env.VITE_OMDB_BASE_URL_AND_API;
+            const queryUrl = `${baseUrl}&s=${query.value}&Type=movie`;
             const options = {
                 method: 'GET',
-                headers: {
-                    'X-RapidAPI-Key': import.meta.env.VITE_RAPID_API_KEY,
-                    'X-RapidAPI-Host': 'imdb8.p.rapidapi.com'
-                }
+                redirect: 'follow'
             };
 
-            await fetch(url, options)
+            await fetch(queryUrl, options)
                 .then(res => res.json())
                 .then(json => queryResults.value = json)
                 .catch(err => console.error('error:' + err));
@@ -41,7 +57,6 @@ export function useSearchMovies() {
                     }]
             }
         }
-        console.log(onlyMovies.value);
     }
     return { query, onlyMovies, startSearch, useApi }
 }

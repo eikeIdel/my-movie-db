@@ -2,22 +2,34 @@
 import { createRouter, createWebHistory } from 'vue-router'
 // setup routes
 const router = createRouter({
-    history: createWebHistory('http://127.0.0.1:5173/'),
+    history: createWebHistory(),
     routes: [
         {
             path: '/',
             name: 'Home',
-            component: () => import('../view/Home.vue')
+            component: () => import('../frontWebpage/FrontApp.vue'),
+            children: [
+                {
+                    path: '/',
+                    name: 'Home',
+                    component: () => import('../frontWebpage/view/Home.vue'),
+                },
+                {
+                    path: 'my-movies',
+                    name: 'MyMovies',
+                    component: () => import('../frontWebpage/view/MyMovies.vue')
+                },
+                {
+                    path: 'search-Movie',
+                    name: 'SearchMovies',
+                    component: () => import('../frontWebpage/view/MovieSearch.vue')
+                },
+            ]
         },
         {
-            path: '/my-movies',
-            name: 'MyMovies',
-            component: () => import('../view/MyMovies.vue')
-        },
-        {
-            path: '/search-Movie',
-            name: 'SearchMovies',
-            component: () => import('../view/MovieSearch.vue')
+            path: '/admin',
+            name: 'AdminDashboard',
+            component: () => import('../adminDashboard/AdminDashboard.vue')
         },
     ]
 })

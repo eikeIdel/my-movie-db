@@ -26,7 +26,6 @@ function log() {
         <input v-model.text="query" name="query" />
         <button type="submit">Start Search</button>
     </form>
-
     <FlexWrap>
         <MovieCard v-for="movie in onlyMovies" :id="movie.id" :Title="movie.Title" :Poster="movie.Poster"
             :Actors="movie.Actors" :Release="movie.Release" :imdbID="movie.imdbID" :key="movie.imdbID"

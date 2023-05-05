@@ -1,9 +1,9 @@
 <script setup>
 
 </script>
-
 <template>
-  <router-view />
+    <div>I am Home</div>
 </template>
 
-<style></style>
+
+<style scoped></style>

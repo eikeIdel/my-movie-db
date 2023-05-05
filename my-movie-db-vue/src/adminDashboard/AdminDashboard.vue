@@ -1,8 +1,11 @@
 <script setup>
-</script>
-<template>
-    <div>I am Home</div>
-</template>
 
+</script>
+
+<template>
+    <div>
+
+    </div>
+</template>
 
 <style scoped></style>

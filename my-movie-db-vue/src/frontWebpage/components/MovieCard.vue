@@ -34,13 +34,12 @@ async function heartClick() {
         deleteMyMovie(props.imdbID)
     }
 }
-
-
 </script>
 
 <template>
     <div v-if="Title" class="MovieCard">
         <LikeHeart :isFav="isFav" :heartColor="heartColor" :heartClick="heartClick" />
+        <v-icon class="info-icon" icon="mdi-home" />
         <img v-if="Poster" :src="Poster" alt="">
         <p>{{ Title }}</p>
         <div>
@@ -64,5 +63,9 @@ async function heartClick() {
 .MovieCard img {
     width: 100%;
     border-radius: 10px 10px 0 0;
+}
+
+.info-icon {
+    position: absolute;
 }
 </style>
